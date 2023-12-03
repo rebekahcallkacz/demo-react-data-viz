@@ -14,7 +14,7 @@ const parseCityTemperatureData = (cityKeys, cityTemperatureData) => {
         // Get the temp for the current city
         const temp = parseFloat(currentValue[city]);
         // Highchats wants data in the format [[x1,y1], [x2, y2]]
-        cityObject.data.push([date, temp]);
+        cityObject.data.push([Date.parse(date), temp]);
         // Add the temp to the running total (will be used to calculate average/mean)
         cityObject.sumTemperature = cityObject.sumTemperature + temp;
       });
