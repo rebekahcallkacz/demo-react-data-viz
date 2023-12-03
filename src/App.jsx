@@ -31,7 +31,7 @@ import parseCityTemperatureData from "./helpers";
 const CITY_KEYS = ["Austin", "San Francisco", "New York"];
 
 function App() {
-  // View the data we'll be working with
+  // View the raw data we'll be working with
   // console.log(cityTemperature);
 
   // Transform and aggregate the data so that we can easily pass it to HighCharts
@@ -44,7 +44,8 @@ function App() {
     return transformedData;
   }, []);
 
-  console.log(parsedCityTemperatureData);
+  // View the parsed data
+  // console.log(parsedCityTemperatureData);
 
   const options = {
     title: {
@@ -60,8 +61,12 @@ function App() {
     <>
       <h1>Data Viz Demo</h1>
       <div className="card">
-        <p>Put a chart here</p>
-        <HighchartsReact highcharts={Highcharts} options={options} />
+        <div className="plot">
+          <HighchartsReact highcharts={Highcharts} options={options} />
+        </div>
+        <div className="plot">
+          <HighchartsReact highcharts={Highcharts} options={options} />
+        </div>
       </div>
     </>
   );

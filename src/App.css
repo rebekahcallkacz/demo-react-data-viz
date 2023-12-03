@@ -4,3 +4,13 @@
   padding: 2rem;
   text-align: center;
 }
+
+.card {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.plot {
+  margin: 5px;
+}
