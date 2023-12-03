@@ -1,35 +1,61 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
+import { cityTemperature } from "@visx/mock-data";
+import "./App.css";
 
+// Steps
+// 1. Review the Highcharts basics which I've added from their documentation: https://github.com/highcharts/highcharts-react
+// and review the basics of Highcharts: https://www.highcharts.com/docs/chart-concepts/understanding-highcharts
+// 2. Explore the mock data we're using (cityTemperature): https://airbnb.io/visx/docs/mock-data
+
+// 3. Build a line chart of temperature over time
+// https://www.highcharts.com/docs/chart-and-series-types/line-chart
+// Build a mock version without using the cityTemperature data
+// Use the cityTemperature data
+// Hint: Will need to define x and y values for each series (cannot be derived automatically): https://www.highcharts.com/docs/chart-concepts/series#the-data-in-a-series
+
+// 4. Build a bar chart of average temperature by city
+// https://www.highcharts.com/docs/chart-and-series-types/bar-chart
+// Build a mock version without using the cityTemperature data
+// Use the cityTemperature data
+// Hint: Will need to calculate average for each city
+
+// 5. Create buttons that allow you to add/remove cities from the charts
+
+// Note: be careful because Highcharts mutates your data in place: https://github.com/highcharts/highcharts-react/issues/326
 function App() {
-  const [count, setCount] = useState(0)
+  // View the data we'll be working with
+  console.log(cityTemperature);
 
+  const cityTemperatureObject = [
+    {
+      cityName: "",
+      data: [
+        ["xValue1", "yValue1"],
+        ["xValue2", "yValue2"],
+      ],
+      mean: 0,
+    },
+  ];
+  const options = {
+    title: {
+      text: "My chart",
+    },
+    series: [
+      {
+        data: [1, 2, 3],
+      },
+    ],
+  };
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
+      <h1>Data Viz Demo</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+        <p>Put a chart here</p>
+        <HighchartsReact highcharts={Highcharts} options={options} />
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
