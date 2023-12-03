@@ -1,5 +1,16 @@
 # React Data Viz Demo
 
+## Run This App Locally
+
+### Initial Setup
+
+- Clone down this repository.
+- Run `npm install`
+
+### Starting up the App
+
+- Run `npm run dev`
+
 ## Setup
 
 - This React app was created using `create-vite` (see [here](https://github.com/vitejs/vite/tree/main/packages/create-vite) for more info).
