@@ -3,6 +3,7 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { cityTemperature } from "@visx/mock-data";
 import "./App.css";
+import parseCityTemperatureData from "./helpers";
 
 // Steps
 // 1. Review the Highcharts basics which I've added from their documentation: https://github.com/highcharts/highcharts-react
@@ -35,37 +36,12 @@ function App() {
 
   // Transform and aggregate the data so that we can easily pass it to HighCharts
   const parsedCityTemperatureData = useMemo(() => {
-    // This is our desired data structure
-    const cityArray = CITY_KEYS.map((city) => {
-      return { cityName: city, data: [], sumTemperature: 0, mean: null };
-    });
-    // Aggregate the data in a way that we can plot it
-    const transformedCityTemperatureData = cityTemperature.reduce(
-      (parsedData, currentValue) => {
-        // Get the date of the current value
-        const date = currentValue["date"];
-        // For each city, add the current data
-        parsedData.forEach((cityObject) => {
-          const city = cityObject.cityName;
-          // Get the temp for the current city
-          const temp = parseFloat(currentValue[city]);
-          // Highchats wants data in the format [[x1,y1], [x2, y2]]
-          cityObject.data.push([date, temp]);
-          // Add the temp to the running total (will be used to calculate average/mean)
-          cityObject.sumTemperature = cityObject.sumTemperature + temp;
-        });
-
-        return parsedData;
-      },
-      cityArray
+    const transformedData = parseCityTemperatureData(
+      CITY_KEYS,
+      cityTemperature
     );
-    // Calculate the mean temp for each city
-    transformedCityTemperatureData.forEach((cityObject) => {
-      cityObject.mean = cityObject.sumTemperature / cityObject.data.length;
-    });
-    return transformedCityTemperatureData;
-
-    // Hint: you could add city filter here
+    // Hint: you could add a city filter here
+    return transformedData;
   }, []);
 
   console.log(parsedCityTemperatureData);
