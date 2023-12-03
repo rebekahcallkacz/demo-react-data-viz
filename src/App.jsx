@@ -64,9 +64,6 @@ function App() {
         <div className="plot">
           <HighchartsReact highcharts={Highcharts} options={options} />
         </div>
-        <div className="plot">
-          <HighchartsReact highcharts={Highcharts} options={options} />
-        </div>
       </div>
     </>
   );
