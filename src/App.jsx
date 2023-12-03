@@ -32,7 +32,7 @@ const CITY_KEYS = ["Austin", "San Francisco", "New York"];
 
 function App() {
   // View the raw data we'll be working with
-  // console.log(cityTemperature);
+  console.log("raw data", cityTemperature);
 
   // Transform and aggregate the data so that we can easily pass it to HighCharts
   const parsedCityTemperatureData = useMemo(() => {
@@ -45,24 +45,48 @@ function App() {
   }, []);
 
   // View the parsed data
-  // console.log(parsedCityTemperatureData);
+  console.log("parsed data", parsedCityTemperatureData);
 
-  const options = {
+  // Example line chart
+  const lineChartOptions = {
+    // Line chart is the inferred type so we don't need to include it
     title: {
-      text: "My chart",
+      text: "My line chart",
     },
     series: [
       {
-        data: [1, 2, 3],
+        data: [1, 3, 5],
       },
     ],
+    xAxis: { title: { text: "Values I passed in" } },
+    yAxis: { title: { text: "Inferred values" } },
   };
+
+  // Example bar chart
+  const barChartOptions = {
+    chart: { type: "bar" },
+    title: {
+      text: "My bar chart",
+    },
+    series: [
+      {
+        data: [1, 3, 5],
+      },
+    ],
+    xAxis: { title: { text: "Inferred values" } },
+    // y is the values that are passed in under series.data for bar and column plots
+    yAxis: { title: { text: "Values I passed in" } },
+  };
+
   return (
     <>
       <h1>Data Viz Demo</h1>
       <div className="card">
         <div className="plot">
-          <HighchartsReact highcharts={Highcharts} options={options} />
+          <HighchartsReact highcharts={Highcharts} options={lineChartOptions} />
+        </div>
+        <div className="plot">
+          <HighchartsReact highcharts={Highcharts} options={barChartOptions} />
         </div>
       </div>
     </>
