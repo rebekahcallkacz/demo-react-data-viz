@@ -27,7 +27,7 @@
   - Decent customization
   - Official React wrapper
 - Cons
-  - Doesn't have all of the data science chart types
+  - Doesn't have all of the data science chart types you might need
   - Only free for non-commercial use
 - A couple of overviews of popular charting library options
   - [Popular JavaScript charting libraries](https://blog.logrocket.com/comparing-most-popular-javascript-charting-libraries/)
@@ -38,4 +38,4 @@
 - Determining your data story - what are you trying to communicate with your visualization?
   - Analysis - what does your data tell you?
   - Design - how are you going to convey this information to your audience?
-- Implementating your visualization - how are you actually going to write the code?
+- Implementing your visualization - how are you actually going to write the code?
