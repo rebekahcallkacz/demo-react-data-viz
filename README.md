@@ -39,3 +39,11 @@
   - Analysis - what does your data tell you?
   - Design - how are you going to convey this information to your audience?
 - Implementing your visualization - how are you actually going to write the code?
+
+## Demo Goals
+
+- Review Highcharts basics
+- Discuss approaches to data transformation
+- Create a line chart
+- Create a bar chart
+- (Maybe) add interactivity
