@@ -24,6 +24,10 @@ import parseCityTemperatureData from "./helpers";
 
 // 5. Create buttons that allow you to add/remove cities from the charts
 
+// 6. Adjust the styling - edit the tooltips, add labels for the values on the bar chart, change the colors, etc.
+
+// 7. Add another chart - for example, create an area chart that shows each city's temperature over time
+
 // Note: be careful because Highcharts mutates your data in place: https://github.com/highcharts/highcharts-react/issues/326
 
 // This is based off of the keys in `cityTemperature`
@@ -40,42 +44,56 @@ function App() {
       CITY_KEYS,
       cityTemperature
     );
+
+    // Sort by average temperature (coldest to warmest)
+    transformedData.sort((a, b) => a.mean - b.mean);
+
     // Hint: you could add a city filter here
     return transformedData;
   }, []);
 
+  // Create the array of series needed for the line chart
+  const lineSeriesData = useMemo(() => {
+    return parsedCityTemperatureData.map((city) => {
+      return {
+        name: city.cityName,
+        data: city.data,
+      };
+    });
+  }, [parsedCityTemperatureData]);
+
   // View the parsed data
   console.log("parsed data", parsedCityTemperatureData);
+  console.log("line series data", lineSeriesData);
 
   // Example line chart
   const lineChartOptions = {
     // Line chart is the inferred type so we don't need to include it
     title: {
-      text: "My line chart",
+      text: "Temperature over time",
     },
-    series: [
-      {
-        data: [1, 3, 5],
-      },
-    ],
-    xAxis: { title: { text: "Values I passed in" } },
-    yAxis: { title: { text: "Inferred values" } },
+    series: lineSeriesData,
+    xAxis: { type: "datetime" },
+    yAxis: { title: { text: "Fahrenheit" } },
   };
 
   // Example bar chart
   const barChartOptions = {
     chart: { type: "bar" },
     title: {
-      text: "My bar chart",
+      text: "Average temperature",
     },
     series: [
       {
-        data: [1, 3, 5],
+        data: parsedCityTemperatureData.map((city) => city.mean),
+        name: "Avg. temp",
       },
     ],
-    xAxis: { title: { text: "Inferred values" } },
+    xAxis: {
+      categories: parsedCityTemperatureData.map((city) => city.cityName),
+    },
     // y is the values that are passed in under series.data for bar and column plots
-    yAxis: { title: { text: "Values I passed in" } },
+    yAxis: { title: { text: "Fahrenheit" } },
   };
 
   return (
